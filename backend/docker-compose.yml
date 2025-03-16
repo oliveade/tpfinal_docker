@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  symfony:
+    build: .
+    container_name: symfony_api
+    depends_on:
+      - postgres_db
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "postgresql://symfony:password@postgres_db:5432/symfony_db?serverVersion=16&charset=utf8"
+
+networks:
+  default:
+    external: false
