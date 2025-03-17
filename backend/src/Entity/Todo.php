@@ -16,8 +16,8 @@ class Todo
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $done = null;
+    #[ORM\Column(type: 'boolean')] 
+    private bool $done = false; 
 
     public function getId(): ?int
     {
@@ -32,19 +32,17 @@ class Todo
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
-
         return $this;
     }
 
-    public function getDone(): ?string
+    public function isDone(): bool 
     {
         return $this->done;
     }
 
-    public function setDone(string $done): static
+    public function setDone(bool $done): static 
     {
         $this->done = $done;
-
         return $this;
     }
 }

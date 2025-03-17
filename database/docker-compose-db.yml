@@ -1,0 +1,17 @@
+services:
+  postgres_db:
+    image: postgres:alpine  
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: symfony
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: symfony_todo
+    ports:
+      - "5432:5432" 
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    external: true 

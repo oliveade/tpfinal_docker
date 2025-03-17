@@ -1,5 +1,18 @@
+# Dockerfile
 FROM php:8.2-fpm-alpine
-WORKDIR /var/www/html
+
+RUN apk add --no-cache \
+    postgresql-dev \
+    && docker-php-ext-install pdo pdo_pgsql
+
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+
+WORKDIR /var/www/symfony
+
 COPY . .
-RUN docker-php-ext-install pdo pdo_pgsql
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+
+RUN composer install
+
+EXPOSE 80
