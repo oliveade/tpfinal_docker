@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Todos{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des Todos</h1>
+
+        {% if todos is empty %}
+            <p>Aucune tâche trouvée.</p>
+        {% else %}
+            <ul>
+                {% for todo in todos %}
+                    <li>
+                        {{ todo.titre }} 
+                        {% if todo.done %} ✅ {% else %} ❌ {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

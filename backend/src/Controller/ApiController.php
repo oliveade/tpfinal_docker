@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Controller;
-use App\Repository\TodoRepository; 
+
+use App\Repository\TodoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,9 +11,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api/todos', name: 'get_todos', methods: ['GET'])]
-    public function getTodos(TodoRepository $todoRepository): JsonResponse
+    #[Route('/todos', name: 'todos_list', methods: ['GET'])]
+    public function todosView(TodoRepository $todoRepository): Response
     {
-        return $this->json($todoRepository->findAll());
+        $todos = $todoRepository->findAll();
+        return $this->render('todos/index.html.twig', [
+            'todos' => $todos,
+        ]);
     }
 }
